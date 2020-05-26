@@ -32,6 +32,13 @@ AddCommand("whitelistremove", function(player, steamid)
 	end
 end)
 
+
+AddCommand("xyz", function(player)
+	x, y, z = GetPlayerLocation(player)
+	print(x, y, z)
+end)
+
+
 AddCommand("tpcoords", function(player, x, y, z)
 	if PlayerData[player].adminlevel >= 3 then
 		if x == nil or y == nil or z == nil then 
@@ -154,6 +161,34 @@ AddCommand("removecash", function(player, player2, amount)
 		print(GetPlayerSteamId(player) .. " tried using /removecash without permission!")
 	end
 end)
+
+function withdraw(player, amount)
+	if amount == nil then
+		print("Invalid Usage : /withdraw <amount>")
+	else
+		PlayerData[tonumber(player)].bank = PlayerData[tonumber(player)].bank - amount
+		PlayerData[tonumber(player)].cash = PlayerData[tonumber(player)].cash + amount
+		UpdatePlayerHud(player, "bank", PlayerData[tonumber(player)].bank)
+		UpdatePlayerHud(player, "cash", PlayerData[tonumber(player)].cash)	
+		AddPlayerChat(player, "You have withdrawn $" ..amount.. " from the bank")
+	end
+end
+AddFunctionExport("withdraw", withdraw)
+
+function deposit(player, amount)
+	if amount == nil then
+		print("Invalid Usage : /deposit <amount>")
+	else
+		PlayerData[tonumber(player)].cash = PlayerData[tonumber(player)].cash - amount
+		PlayerData[tonumber(player)].bank = PlayerData[tonumber(player)].bank + amount
+		UpdatePlayerHud(player, "bank", PlayerData[tonumber(player)].bank)
+		UpdatePlayerHud(player, "cash", PlayerData[tonumber(player)].cash)	
+		AddPlayerChat(player, "You have deposited $" ..amount.. " from the bank")
+	end
+end
+AddFunctionExport("deposit", deposit)
+
+
 
 AddCommand("addbank", function(player, player2, amount)
 	local SteamID = GetPlayerSteamId(player2)
@@ -341,6 +376,31 @@ AddCommand("do", function(player, ...)
 		end, doText))
 	end
 end)
+
+function GetPlayerJob(player)
+    return tostring(PlayerData[player].job)
+end
+AddFunctionExport("GetPlayerJob", GetPlayerJob)
+
+function GetPlayerJoblvl(player)
+    return tonumber(PlayerData[player].joblevel)
+end
+AddFunctionExport("GetPlayerJoblvl", GetPlayerJoblvl)
+
+function GetPlayerCash(player)
+    return tonumber(PlayerData[player].cash)
+end
+AddFunctionExport("GetPlayerCash", GetPlayerCash)
+
+function GetPlayerBank(player)
+    return tonumber(PlayerData[player].bank)
+end
+AddFunctionExport("GetPlayerBank", GetPlayerBank)
+
+function GetPlayerDirtyMoney(player)
+    return tonumber(PlayerData[player].dirtymoney)
+end
+AddFunctionExport("GetPlayerDirtyMoney", GetPlayerDirtyMoney)
 
 AddEvent("OnPlayerChat", function(player, text)
 	local x, y = GetPlayerLocation(player)

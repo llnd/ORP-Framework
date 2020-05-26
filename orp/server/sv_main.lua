@@ -1,3 +1,5 @@
+ORP = ImportPackage("orp")
+
 AddEvent("OnPackageStart", function()
 	print("")
 	print("-------------------------------")
@@ -290,10 +292,10 @@ end
 AddRemoteEvent("ORP:UpdatePlayerHud", UpdatePlayerHud)
 
 function FetchUIInfo(player)
-	local cashdata = PlayerData[player].cash
-	local bankdata = PlayerData[player].bank
-	local dirtydata = PlayerData[player].dirtymoney
-	local jobdata = { PlayerData[player].job, PlayerData[player].jobrank }
+	local cashdata = ORP.GetPlayerCash(player)  
+	local bankdata = ORP.GetPlayerBank(player)
+	local dirtydata = ORP.GetPlayerDirtyMoney(player)
+	local jobdata = { GetPlayerJoblvl(player), GetPlayerJob(player) }
 	CallRemoteEvent(player, "ORP:UpdateUIJS", "cash", cashdata)
 	CallRemoteEvent(player, "ORP:UpdateUIJS", "bank", bankdata)
 	CallRemoteEvent(player, "ORP:UpdateUIJS", "dirty", dirtydata)

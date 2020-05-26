@@ -25,13 +25,13 @@ RESPAWN_ARMOR = 100 -- The armor players spawn with ⚠ Ignored if SAVE_ARMOR is
 START_CASH = 1000 -- How much Cash new players start with
 START_BANK = 5000 -- How much Bank new players start with
 
-SAVE_DEAD = true -- Whether or not the player should spawn dead if they logged out while dead
+SAVE_DEAD = false -- Whether or not the player should spawn dead if they logged out while dead
 
 AUTO_SAVE_TIMER = 300000 -- How often players data should automatically save in ms | Default: 5 Minutes
 
-AUTO_START_PACKAGES = true -- Whether or not O:RP should automatically start any packages | Must be named orp_<packagename> EX: orp_vehicles | This is experimental, it may not work
+AUTO_START_PACKAGES = false -- Whether or not O:RP should automatically start any packages | Must be named orp_<packagename> EX: orp_vehicles | This is experimental, it may not work
 
-SHOW_NAME_TAG = true -- Whether or not name tags above players show
+SHOW_NAME_TAG = false -- Whether or not name tags above players show
 SHOW_HEALTH_TAG = true -- Whether or not health tags above players show
 SHOW_ARMOR_TAG = true -- Whether or not armor tags above players show
 SHOW_VOICE_TAG = true -- Whether or not voice tags above players show
